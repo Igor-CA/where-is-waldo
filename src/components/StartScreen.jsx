@@ -1,11 +1,9 @@
 import CharacterCard from "./CharacterCard"
-import mainImage from "../assets/the-loc-nar-by-egor-klyuchnyk.jpg"
 import "./StartScreen.css"
 
-export default function StartScreen({charactersList}){
-    console.log(charactersList)
+export default function StartScreen({charactersList, start}){
     return(
-        <div className="start-screen">
+        <div className='start-screen'>
             
             <div className="start-screen__basic-info">
                 <h1>Whelcome to "where is ...?"</h1>
@@ -23,6 +21,13 @@ export default function StartScreen({charactersList}){
                     )
                 })}
             </div>
+
+            <input 
+                type="button"
+                value="Start Game"
+                className="start-button"
+                onClick={start}
+            />
         </div>
     )
 }

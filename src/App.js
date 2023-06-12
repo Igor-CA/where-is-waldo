@@ -6,6 +6,9 @@ import StartScreen from './components/StartScreen';
 
 function App() {
   const [characters, setCharacters] = useState([])
+  const [started, setStarted] = useState(false)
+  const [crosshair, setCrosshair] = useState({x:0, y:0})
+  const [selectionMode, setSelectionMode] = useState(false)
 
   const shuffleCaractersList = () => {
     let shuffledList = [...charactersList]
@@ -21,19 +24,52 @@ function App() {
     let roundCharacters = shuffledList.filter((characters, index) => {
       return index<3
     })
-    console.log(roundCharacters)
     setCharacters(roundCharacters)
   }
   
+  const startGame = () => {
+    setStarted(true)
+  }
 
+  const sendPosition = (e) => {
+    let xPosition = (e.pageX/e.target.width).toFixed(2)
+    let yPosition = (e.pageY/e.target.height).toFixed(2)
+    if(started){
+      console.log(xPosition, yPosition)
+    }
+  }
+
+  const showCrosshair = (e) => {
+    setCrosshairPosition(e)
+    setSelectionMode(true)
+  }
+
+  const setCrosshairPosition = (e) => {
+    let xPosition = e.pageX
+    let yPosition = e.pageY
+    setCrosshair({x:xPosition, y:yPosition})
+  }
+ 
   return (
-    <div className="App">
-      {characters.length === 3 && <StartScreen charactersList={characters}></StartScreen>}
+    <div className={started?"App":"App background-mask"}>
+      {!started?(
+        characters.length > 1 && <StartScreen charactersList={characters} start={startGame}></StartScreen>
+      ):null
+      }
       <img src={mainImage} alt="game"
         className='game-image'
-        onClick={(e) => console.log((e.pageX/e.target.width).toFixed(2), (e.pageY/e.target.height).toFixed(2))}
+        onClick={ e => showCrosshair(e)}
         onLoad={setRoundCharacters}
       ></img>
+      {selectionMode && 
+        <div 
+          className='crosshair'
+          style={{
+            top: crosshair.y,
+            left: crosshair.x
+          }}
+        ></div>
+      }
     </div>
   );
 }

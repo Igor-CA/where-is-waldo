@@ -1,0 +1,30 @@
+.selection-cotainer{
+    position: absolute;
+  }
+  .selection-cotainer__crosshair{
+    width: 5vw;
+    height: 5vw;
+    background-color: rgba(255, 255, 255, 0.25);
+    border: 2px dashed white;
+    border-radius: 50%;
+    translate: -50% -50%;
+  }
+  .selection-cotainer__inputs-container{
+    display: flex;
+    flex-direction: column;
+    translate: -50%;
+    background-color: #303030;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+  }
+  .selection-cotainer__input{
+    background-color: #00000000;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 10px;
+  }
+  .selection-cotainer__input:hover{
+    background-color: #FFFFFF40;
+  }

@@ -24,12 +24,3 @@
 .game-image{
   width: 100vw;
 }
-.crosshair{
-  position: absolute;
-  width: 5vw;
-  height: 5vw;
-  background-color: rgba(255, 255, 255, 0.25);
-  border: 2px dashed white;
-  border-radius: 50%;
-  translate: -50% -50%;
-}

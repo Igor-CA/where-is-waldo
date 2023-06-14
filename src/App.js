@@ -3,6 +3,7 @@ import {charactersList} from "./characters"
 import mainImage from "./assets/the-loc-nar-by-egor-klyuchnyk.jpg"
 import { useState } from 'react';
 import StartScreen from './components/StartScreen';
+import SelectionComponent from './components/SelectComponent';
 
 function App() {
   const [characters, setCharacters] = useState([])
@@ -48,27 +49,21 @@ function App() {
     let xPosition = e.pageX
     let yPosition = e.pageY
     setCrosshair({x:xPosition, y:yPosition})
+    sendPosition(e)
   }
  
   return (
-    <div className={started?"App":"App background-mask"}>
+    <div className={started?"App":"App background-mask"} onClick={ e => started && showCrosshair(e)}>
       {!started?(
         characters.length > 1 && <StartScreen charactersList={characters} start={startGame}></StartScreen>
       ):null
       }
       <img src={mainImage} alt="game"
         className='game-image'
-        onClick={ e => showCrosshair(e)}
         onLoad={setRoundCharacters}
       ></img>
       {selectionMode && 
-        <div 
-          className='crosshair'
-          style={{
-            top: crosshair.y,
-            left: crosshair.x
-          }}
-        ></div>
+        <SelectionComponent crosshair={crosshair} characters={characters}></SelectionComponent>
       }
     </div>
   );

@@ -33,7 +33,7 @@ export const charactersList = [
     },
     {
         image: meg,
-        name: "Meg from",
+        name: "Meg",
         origin: "Family guy",
     },
     {

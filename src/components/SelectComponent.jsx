@@ -1,5 +1,6 @@
+import CharacterOption from "./CharacterOption"
 import "./SelectComponent.css"
-export default function SelectionComponent({crosshair, characters}){
+export default function SelectionComponent({crosshair, characters, finishSelection}){
     return (
       <div 
         className='selection-cotainer'
@@ -12,9 +13,15 @@ export default function SelectionComponent({crosshair, characters}){
           className='selection-cotainer__crosshair'
         ></div>
         <div className='selection-cotainer__inputs-container'>
-          <button className='selection-cotainer__input'>{characters[0].name}</button>
-          <button className='selection-cotainer__input'>{characters[1].name}</button>
-          <button className='selection-cotainer__input'>{characters[2].name}</button>
+          {characters.map(character => {
+            return(
+              <CharacterOption 
+                key={character.name} 
+                character={character}
+                finishSelection={finishSelection}
+              ></CharacterOption>
+            )
+          })}
         </div>
       </div>
     )

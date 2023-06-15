@@ -51,9 +51,9 @@ function App() {
     setCrosshair({x:xPosition, y:yPosition})
     sendPosition(e)
   }
- 
+
   return (
-    <div className={started?"App":"App background-mask"} onClick={ e => started && showCrosshair(e)}>
+    <div className={started?"App":"App background-mask"}>
       {!started?(
         characters.length > 1 && <StartScreen charactersList={characters} start={startGame}></StartScreen>
       ):null
@@ -61,9 +61,14 @@ function App() {
       <img src={mainImage} alt="game"
         className='game-image'
         onLoad={setRoundCharacters}
+        onClick={ e => started && showCrosshair(e)}
       ></img>
       {selectionMode && 
-        <SelectionComponent crosshair={crosshair} characters={characters}></SelectionComponent>
+        <SelectionComponent 
+          crosshair={crosshair} 
+          characters={characters} 
+          finishSelection={setSelectionMode}
+        ></SelectionComponent>
       }
     </div>
   );

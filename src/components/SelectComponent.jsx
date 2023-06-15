@@ -5,8 +5,8 @@ export default function SelectionComponent({crosshair, characters, finishSelecti
       <div 
         className='selection-cotainer'
         style={{
-          top: crosshair.y,
-          left: crosshair.x
+          top: crosshair.yScreen,
+          left: crosshair.xScreen
         }}
       >
         <div
@@ -19,6 +19,7 @@ export default function SelectionComponent({crosshair, characters, finishSelecti
                 key={character.name} 
                 character={character}
                 finishSelection={finishSelection}
+                crosshair={crosshair}
               ></CharacterOption>
             )
           })}

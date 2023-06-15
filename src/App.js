@@ -8,7 +8,7 @@ import SelectionComponent from './components/SelectComponent';
 function App() {
   const [characters, setCharacters] = useState([])
   const [started, setStarted] = useState(false)
-  const [crosshair, setCrosshair] = useState({x:0, y:0})
+  const [crosshair, setCrosshair] = useState({x:0, y:0, xScreen:0, yScreen:0})
   const [selectionMode, setSelectionMode] = useState(false)
 
   const shuffleCaractersList = () => {
@@ -32,24 +32,34 @@ function App() {
     setStarted(true)
   }
 
-  const sendPosition = (e) => {
-    let xPosition = (e.pageX/e.target.width).toFixed(2)
-    let yPosition = (e.pageY/e.target.height).toFixed(2)
-    if(started){
-      console.log(xPosition, yPosition)
-    }
-  }
-
   const showCrosshair = (e) => {
     setCrosshairPosition(e)
     setSelectionMode(true)
   }
 
+  const showSelectionResult = (selectedCharacter, result) =>{
+    if(result){
+      console.log(`${selectedCharacter.name} was Found`)
+      let newCharactersList = characters.filter(character => character.name !== selectedCharacter.name)
+      if(newCharactersList.length > 0){
+        setCharacters(newCharactersList)
+      }else{
+        setRoundCharacters()
+        setStarted(false)
+      }
+    }else{
+      console.log(`That is not ${selectedCharacter.name}. Keep looking`)
+    }
+
+    setSelectionMode(false)
+  }
+
   const setCrosshairPosition = (e) => {
-    let xPosition = e.pageX
-    let yPosition = e.pageY
-    setCrosshair({x:xPosition, y:yPosition})
-    sendPosition(e)
+    let xScreen = e.pageX
+    let yScreen = e.pageY
+    let xPosition = +(e.pageX/e.target.width).toFixed(2)
+    let yPosition = +(e.pageY/e.target.height).toFixed(2)
+    setCrosshair({x:xPosition, y:yPosition, xScreen:xScreen, yScreen:yScreen})
   }
 
   return (
@@ -67,7 +77,7 @@ function App() {
         <SelectionComponent 
           crosshair={crosshair} 
           characters={characters} 
-          finishSelection={setSelectionMode}
+          finishSelection={showSelectionResult}
         ></SelectionComponent>
       }
     </div>

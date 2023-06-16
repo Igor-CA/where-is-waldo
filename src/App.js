@@ -4,12 +4,16 @@ import mainImage from "./assets/the-loc-nar-by-egor-klyuchnyk.jpg"
 import { useState } from 'react';
 import StartScreen from './components/StartScreen';
 import SelectionComponent from './components/SelectComponent';
+import EndScreen from './components/EndScreen';
 
 function App() {
   const [characters, setCharacters] = useState([])
   const [started, setStarted] = useState(false)
   const [crosshair, setCrosshair] = useState({x:0, y:0, xScreen:0, yScreen:0})
   const [selectionMode, setSelectionMode] = useState(false)
+  const [resultMessage, setresultMessage] = useState(null)
+  const [gameTime, setgameTime] = useState()
+  const [endScreen, setEndScreen] = useState(false)
 
   const shuffleCaractersList = () => {
     let shuffledList = [...charactersList]
@@ -20,7 +24,7 @@ function App() {
     return shuffledList
   }
   
-  const setRoundCharacters = () => {
+  const setGameCharacters = () => {
     let shuffledList = shuffleCaractersList()
     let roundCharacters = shuffledList.filter((characters, index) => {
       return index<3
@@ -29,7 +33,14 @@ function App() {
   }
   
   const startGame = () => {
+    setGameCharacters()
+    setStarted(false)
+    setEndScreen(false)
+  }
+
+  const startRound = () => {
     setStarted(true)
+    setgameTime(new Date())
   }
 
   const showCrosshair = (e) => {
@@ -39,19 +50,36 @@ function App() {
 
   const showSelectionResult = (selectedCharacter, result) =>{
     if(result){
-      console.log(`${selectedCharacter.name} was Found`)
+      showMessage(`${selectedCharacter.name} was found congratulations`, result)
       let newCharactersList = characters.filter(character => character.name !== selectedCharacter.name)
       if(newCharactersList.length > 0){
         setCharacters(newCharactersList)
       }else{
-        setRoundCharacters()
-        setStarted(false)
+        endGame()
       }
     }else{
-      console.log(`That is not ${selectedCharacter.name}. Keep looking`)
+      showMessage(`That is not ${selectedCharacter.name}. Keep looking`, result)
     }
-
     setSelectionMode(false)
+  }
+
+  function showMessage(message, wasFound){
+    setresultMessage(
+      <p className={wasFound?'message green': 'message message--red'}>
+        {message}
+      </p>
+    )
+    setTimeout(()=>{setresultMessage(null)}, 3000)
+  }
+  const seeRoundTime = () => {
+    const currentTime = new Date()
+    const oldTime = gameTime
+    const timeDifference = (currentTime.getTime() - oldTime.getTime())/1000
+    return timeDifference
+  }
+  const endGame = ()=> {
+    setgameTime(seeRoundTime)
+    setEndScreen(true)
   }
 
   const setCrosshairPosition = (e) => {
@@ -63,14 +91,15 @@ function App() {
   }
 
   return (
-    <div className={started?"App":"App background-mask"}>
+    <div className={(!endScreen && started)?"App":"App background-mask"}>
       {!started?(
-        characters.length > 1 && <StartScreen charactersList={characters} start={startGame}></StartScreen>
+        characters.length > 1 && <StartScreen charactersList={characters} start={startRound}></StartScreen>
       ):null
       }
+      {resultMessage}
       <img src={mainImage} alt="game"
         className='game-image'
-        onLoad={setRoundCharacters}
+        onLoad={startGame}
         onClick={ e => started && showCrosshair(e)}
       ></img>
       {selectionMode && 
@@ -79,6 +108,9 @@ function App() {
           characters={characters} 
           finishSelection={showSelectionResult}
         ></SelectionComponent>
+      }
+      {endScreen &&
+        <EndScreen time={gameTime} restartGame={startGame}></EndScreen>
       }
     </div>
   );

@@ -6,7 +6,6 @@
   font-family: Arial, Helvetica, sans-serif;
   box-sizing: border-box;
 }
-
 .background-mask::before {
   content: "";
   position: fixed;
@@ -23,4 +22,19 @@
 }
 .game-image{
   width: 100vw;
+}
+.message{
+  position: fixed;
+  font-weight: bold;
+  background-color: #1fb71f;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.492);
+  top: 10px;
+  left: 50%;
+  translate: -50%;
+}
+.message--red{
+  background-color: red;
 }

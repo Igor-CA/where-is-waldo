@@ -37,5 +37,5 @@
     font-weight: bold;
 }
 .start-button:active{
-    background-color: hsla(0, 100%, 50%, 0.8);
+    background-color: #ff0000cc;
 }

@@ -1,0 +1,28 @@
+.navbar{
+    background-color: black;
+}
+.navbar__list{
+    display: flex;
+    list-style: none;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+}
+.navbar__list > *{
+    flex-grow: 1;
+    text-align: center;
+}
+.navbar__link{
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 15px;
+    width: 100%;
+}
+.navbar__link:active{
+    transition: 100ms;
+    background-color: #ffffff37;
+}

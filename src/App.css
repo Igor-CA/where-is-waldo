@@ -6,6 +6,9 @@
   font-family: Arial, Helvetica, sans-serif;
   box-sizing: border-box;
 }
+body{
+  background-color: #161153
+}
 .background-mask::before {
   content: "";
   position: fixed;

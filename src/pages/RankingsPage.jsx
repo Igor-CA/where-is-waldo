@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {collection, getDocs, limit, orderBy, query} from "firebase/firestore"
 import {db} from '../firebase/config'
-
+import "./RankingsPage.css"
 export default function RankingsPage(){
     const [playersList, setPlayersList] = useState([])
     useEffect(() => {
@@ -15,12 +15,21 @@ export default function RankingsPage(){
         loadRanking()
     }, [])
     return(
-        <div>
+        <table className="rankings-container">
+            <tr>
+                <th scope="col">Position</th>
+                <th scope="col">Name</th>
+                <th scope="col">Time(s)</th>
+            </tr>
             {playersList.map((player, index) => {
                 return(
-                    <p>{index+1} - {player.name}: {player.time}s</p>
+                    <tr className="rankings-container__players-info" key={index}>
+                        <td>{index+1}</td>
+                        <td>{player.name}</td>
+                        <td>{player.time}</td>
+                    </tr>
                 )
             })}
-        </div>
+        </table>
     )
 }

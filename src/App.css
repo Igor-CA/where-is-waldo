@@ -7,7 +7,12 @@
   box-sizing: border-box;
 }
 body{
-  background-color: #161153
+  background-color: #161153;
+}
+.App{
+  height: 1px;
+  min-height: 100vh;
+  width: 100vw;
 }
 .background-mask::before {
   content: "";

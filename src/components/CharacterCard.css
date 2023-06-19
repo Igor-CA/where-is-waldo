@@ -2,11 +2,10 @@
     flex-grow: 1;
     background-color: white;
     display: flex;
-    height: 1px;
+    height: 80px;
 }
 .character-card__info{
     width: 50%;
-    font-weight: bold;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -16,9 +15,6 @@
 .character-card__info__name{
     font-size: 1.4em;
     margin: 5px;
-}
-.character-card__info_origin{
-
 }
 .character-card__image-container{
     width: 50%;

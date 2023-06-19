@@ -1,16 +1,13 @@
 .credits-container{
-    position: relative;
-    top: 50%;
-    left: 50%;
     background-color: white;
     width: 90vw;
     max-width: 600px;
     padding: 30px;
     border-radius: 20px;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.321);
-    translate: -50% -50%;
     line-height: 1.5em;
     text-align: justify;
+    margin: 20px auto;
 }
 .credits-container > p{
     text-indent: 30px;

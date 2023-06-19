@@ -16,3 +16,13 @@
 .rankings-container *{
     border: 1px solid #FA1B01;
 }
+@media only screen and (max-width: 320px){
+    .rankings-container{
+        font-size: 1em;
+    }
+}
+@media only screen and (min-width: 320px) and (max-width: 768px) {
+    .rankings-container{
+        font-size: 1.5em;
+    }
+}

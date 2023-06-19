@@ -4,7 +4,7 @@ This game is a project from [The Odin Project](https://www.theodinproject.com/).
 This project was bootstrapped with Create React App.<br />
 In this version you will have to find tree random characters in the image.
 ### Demo 
-[![Demo](https://github.com/Igor-CA/where-is-waldo/assets/122459409/bea29628-654f-404c-96df-46e4070ab128)
+[![Demo](https://raw.githubusercontent.com/Igor-CA/where-is-waldo/master/src/assets/Demo.png)
 ](https://find-these-characters.web.app/)
 
 ### Install
